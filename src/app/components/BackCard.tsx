@@ -1,4 +1,5 @@
 import React from "react";
+import PokemonTypeCard, { POKEMON_TYPE } from "./PokemonTypeCard";
 
 type Props = {
   Attack: Attacks;
@@ -23,15 +24,18 @@ const BackCard = ({ Attack }: Props) => {
         <div key={index} className="flex flex-row gap-2 justify-between">
           <div>{value.name}</div>
           <div>{value.damage}</div>
-          <div>{value.type}</div>
+          <PokemonTypeCard type={value.type as POKEMON_TYPE} />
         </div>
       ))}
       <div>Special</div>
       {Attack.special.map((value: Attack, index: number) => (
-        <div key={index} className="flex flex-row gap-2 justify-between">
+        <div
+          key={index}
+          className="flex flex-row gap-3 justify-between items-center"
+        >
           <div>{value.name} </div>
           <div>{value.damage}</div>
-          <div>{value.type}</div>
+          <PokemonTypeCard type={value.type as POKEMON_TYPE} />
         </div>
       ))}
     </div>

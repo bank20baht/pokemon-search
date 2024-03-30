@@ -3,14 +3,8 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import CardPokemon, { PokemonCard } from "./components/CardPokemon";
-import SearchComponent from "./components/SearchSuggestions";
 import useStore from "./store/store";
-import {
-  listPokemon,
-  queryBySearchBar,
-  queryBySuggestion,
-} from "./graphql/queries";
-import SearchBar from "./components/SearchBar";
+import { listPokemon, queryBySearchBar } from "./graphql/queries";
 import Loading from "./components/Loading";
 import NotFound from "./not-found";
 

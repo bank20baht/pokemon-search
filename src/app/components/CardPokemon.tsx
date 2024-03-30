@@ -1,9 +1,11 @@
+"use client";
+
 import React from "react";
 import PokemonTypeCard, { POKEMON_TYPE } from "./PokemonTypeCard";
 import "./CardPokemon.css";
 import BackCard from "./BackCard";
 import { Attacks } from "./BackCard";
-
+import { useRouter } from "next/navigation";
 type Props = {
   PokemonInfo: PokemonCard;
 };
@@ -17,8 +19,15 @@ export type PokemonCard = {
 };
 
 const CardPokemon = ({ PokemonInfo }: Props) => {
+  const router = useRouter();
+
   return (
-    <div className="card-container">
+    <div
+      className="card-container"
+      onClick={() => {
+        router.push("/" + PokemonInfo.name);
+      }}
+    >
       <div className="card">
         <div className="front-card">
           <div className="">
