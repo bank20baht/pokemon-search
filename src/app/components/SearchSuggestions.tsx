@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useStore from "../store";
 
 interface Pokemon {
   name: string;
@@ -17,7 +18,8 @@ interface Props {
 }
 
 const SearchComponent: React.FC<Props> = ({ pokemons }) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const { searchValue, setSearchValue } = useStore();
+
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -27,7 +29,7 @@ const SearchComponent: React.FC<Props> = ({ pokemons }) => {
 
   const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setSearchTerm(value);
+    setSearchValue(value);
     if (!value) {
       setSuggestions([]);
       return;
@@ -43,7 +45,7 @@ const SearchComponent: React.FC<Props> = ({ pokemons }) => {
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    setSearchTerm(suggestion);
+    setSearchValue(suggestion);
     toggleModal();
     setSuggestions([]);
   };
@@ -52,7 +54,7 @@ const SearchComponent: React.FC<Props> = ({ pokemons }) => {
     <div style={{ position: "relative" }}>
       <input
         type="text"
-        value={searchTerm}
+        value={searchValue}
         onChange={onSearchChange}
         autoComplete="off"
         id="pokemonName"

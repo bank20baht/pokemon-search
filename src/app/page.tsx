@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
-import CardPokemon from "./components/CardPokemon";
+import CardPokemon, { PokemonCard } from "./components/CardPokemon";
 import SearchComponent from "./components/SearchSuggestions";
-
+import useStore from "./store";
+import BackCard from "./components/BackCard";
 const listPokemon = (limit: number) => gql`
   query listPokemon {
     query {
@@ -13,6 +14,18 @@ const listPokemon = (limit: number) => gql`
         id
         image
         types
+        attacks {
+          fast {
+            name
+            type
+            damage
+          }
+          special {
+            name
+            type
+            damage
+          }
+        }
       }
     }
   }
@@ -26,6 +39,18 @@ const queryBySearchBar = (PokemonName: string) => {
         id
         image
         types
+      }
+      attacks {
+        fast {
+          name
+          type
+          damage
+        }
+        special {
+          name
+          type
+          damage
+        }
       }
     }
   `;
@@ -42,13 +67,13 @@ const queryBySuggestion = gql`
 `;
 
 export default function Home() {
-  const [searchPokemon, setSearchPokemon] = useState("");
   const [limit, setLimit] = useState(10);
+  const { searchValue } = useStore();
 
   const { loading, error, data } = useQuery(
-    searchPokemon ? queryBySearchBar(searchPokemon) : listPokemon(limit),
+    searchValue ? queryBySearchBar(searchValue) : listPokemon(limit),
     {
-      variables: { PokemonName: searchPokemon },
+      variables: { PokemonName: searchValue },
       fetchPolicy: "network-only",
     }
   );
@@ -62,16 +87,15 @@ export default function Home() {
       {suggestion.loading ? (
         <div></div>
       ) : (
-        <div className="py-10 flex items-center justify-center">
+        <div className="py-10 flex items-center justify-center bg-red-500">
           <SearchComponent pokemons={suggestion.data} />
         </div>
       )}
-
       {loading ? (
         <div className="flex justify-center items-center">Loading</div>
       ) : data.query ? (
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 p-5">
-          {data.query.pokemons.map((pokemon: any) => (
+          {data.query.pokemons.map((pokemon: PokemonCard) => (
             <CardPokemon key={pokemon.id} PokemonInfo={pokemon} />
           ))}
         </div>
@@ -86,7 +110,6 @@ export default function Home() {
           )}
         </div>
       )}
-
       <div>
         <div className="flex justify-center">
           <div
