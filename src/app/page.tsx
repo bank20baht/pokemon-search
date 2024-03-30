@@ -5,7 +5,7 @@ import { useQuery, gql } from "@apollo/client";
 import CardPokemon, { PokemonCard } from "./components/CardPokemon";
 import SearchComponent from "./components/SearchSuggestions";
 import useStore from "./store";
-import BackCard from "./components/BackCard";
+
 const listPokemon = (limit: number) => gql`
   query listPokemon {
     query {
@@ -31,30 +31,30 @@ const listPokemon = (limit: number) => gql`
   }
 `;
 
-const queryBySearchBar = (PokemonName: string) => {
-  return gql`
-    query pokemonByName {
+const queryBySearchBar = (PokemonName: string) => gql`
+  query getPokemon {
+    query {
       pokemon(name: "${PokemonName}") {
         name
         id
         image
         types
-      }
-      attacks {
-        fast {
-          name
-          type
-          damage
-        }
-        special {
-          name
-          type
-          damage
+        attacks {
+          fast {
+            name
+            type
+            damage
+          }
+          special {
+            name
+            type
+            damage
+          }
         }
       }
     }
-  `;
-};
+  }
+`;
 
 const queryBySuggestion = gql`
   query listPokemon {
@@ -73,7 +73,6 @@ export default function Home() {
   const { loading, error, data } = useQuery(
     searchValue ? queryBySearchBar(searchValue) : listPokemon(limit),
     {
-      variables: { PokemonName: searchValue },
       fetchPolicy: "network-only",
     }
   );
@@ -81,6 +80,9 @@ export default function Home() {
   const suggestion = useQuery(queryBySuggestion, {
     fetchPolicy: "network-only",
   });
+
+  const pokemons = data?.query?.pokemons;
+  const pokemon = data?.query?.pokemon;
 
   return (
     <div className="flex flex-col">
@@ -93,21 +95,21 @@ export default function Home() {
       )}
       {loading ? (
         <div className="flex justify-center items-center">Loading</div>
-      ) : data.query ? (
+      ) : pokemons ? (
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 p-5">
-          {data.query.pokemons.map((pokemon: PokemonCard) => (
+          {pokemons.map((pokemon: PokemonCard) => (
             <CardPokemon key={pokemon.id} PokemonInfo={pokemon} />
           ))}
         </div>
+      ) : pokemon ? (
+        <div className="flex justify-center">
+          <div className="w-80">
+            <CardPokemon PokemonInfo={pokemon} />
+          </div>
+        </div>
       ) : (
         <div className="flex justify-center">
-          {data.pokemon ? (
-            <div className="w-80">
-              <CardPokemon PokemonInfo={data.pokemon} />
-            </div>
-          ) : (
-            <div>not found</div>
-          )}
+          <div>not found</div>
         </div>
       )}
       <div>
