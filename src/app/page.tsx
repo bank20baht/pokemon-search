@@ -12,6 +12,7 @@ import {
 } from "./graphql/queries";
 import SearchBar from "./components/SearchBar";
 import Loading from "./components/Loading";
+import NotFound from "./not-found";
 
 export default function Home() {
   const [limit, setLimit] = useState(10);
@@ -29,10 +30,6 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      <div className="bg-red-500">
-        <SearchBar />
-      </div>
-
       {loading ? (
         <Loading />
       ) : pokemons ? (
@@ -58,8 +55,8 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center">
-          <div>not found</div>
+        <div className="flex justify-center items-center h-full w-full">
+          <NotFound />
         </div>
       )}
     </div>

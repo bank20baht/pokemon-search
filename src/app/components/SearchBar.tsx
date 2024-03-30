@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import SearchComponent from "./SearchSuggestions";
 import { useQuery } from "@apollo/client";
@@ -13,9 +15,9 @@ const SearchBar = (props: Props) => {
   return (
     <div>
       {loading ? (
-        <div className="py-10">{""}</div>
+        <div className="py-10 bg-red-500">{""}</div>
       ) : (
-        <div className="py-10 flex items-center justify-center">
+        <div className="py-10 flex items-center justify-center bg-red-500">
           <SearchComponent pokemons={data} />
         </div>
       )}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ApolloWrapper } from "./ApolloWrapper";
+import SearchBar from "./components/SearchBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full w-full">
       <body className={inter.className}>
-        <ApolloWrapper>{children}</ApolloWrapper>
+        <ApolloWrapper>
+          <SearchBar />
+          {children}
+        </ApolloWrapper>
       </body>
     </html>
   );
