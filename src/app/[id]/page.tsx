@@ -1,11 +1,11 @@
 "use client";
 
-import { queryBySearchBar } from "@/app/graphql/queries";
+import { queryDetailPokemon } from "@/app/graphql/queries";
 import { useQuery } from "@apollo/client";
 import React from "react";
 import NotFound from "../not-found";
-import CardPokemon from "../components/CardPokemon";
 import Loading from "../components/Loading";
+import PokemonDetail from "../components/PokemonDetail";
 
 type Props = {
   params: {
@@ -14,7 +14,7 @@ type Props = {
 };
 
 const DetailPage = ({ params }: Props) => {
-  const { loading, error, data } = useQuery(queryBySearchBar(params.id), {
+  const { loading, error, data } = useQuery(queryDetailPokemon(params.id), {
     fetchPolicy: "network-only",
   });
 
@@ -22,18 +22,14 @@ const DetailPage = ({ params }: Props) => {
     <div>
       {loading ? (
         <Loading />
+      ) : data?.query?.pokemon ? (
+        <div className="flex justify-center">
+          <PokemonDetail pokemon={data?.query?.pokemon} />
+        </div>
       ) : (
-        data?.query?.pokemon ? (
-          <div className="flex justify-center">
-            <div className="w-80">
-              <CardPokemon PokemonInfo={data?.query?.pokemon} />
-            </div>
-          </div>
-        ) : (
-          <div className="flex justify-center items-center h-full w-full">
-            <NotFound />
-          </div>
-        )
+        <div className="flex justify-center items-center h-full w-full">
+          <NotFound />
+        </div>
       )}
     </div>
   );

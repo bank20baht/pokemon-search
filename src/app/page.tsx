@@ -7,6 +7,7 @@ import useStore from "./store/store";
 import { listPokemon, queryBySearchBar } from "./graphql/queries";
 import Loading from "./components/Loading";
 import NotFound from "./not-found";
+import PokemonList from "./components/PokemonList";
 
 export default function Home() {
   const [limit, setLimit] = useState(10);
@@ -28,11 +29,7 @@ export default function Home() {
         <Loading />
       ) : pokemons ? (
         <div>
-          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 p-5">
-            {pokemons.map((pokemon: PokemonCard) => (
-              <CardPokemon key={pokemon.id} PokemonInfo={pokemon} />
-            ))}
-          </div>
+          <PokemonList pokemonInfo={pokemons} />
           <div className="flex justify-center">
             <div
               className="text-white bg-blue-400 rounded-lg py-3 px-2"
