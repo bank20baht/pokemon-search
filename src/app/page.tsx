@@ -53,23 +53,19 @@ export default function Home() {
     }
   );
 
-  const suggestion = useQuery(queryBySuggestion);
-
-  console.log(suggestion.data.query.pokemons);
+  const suggestion = useQuery(queryBySuggestion, {
+    fetchPolicy: "network-only",
+  });
 
   return (
     <div className="flex flex-col">
-      <div className="py-10 flex items-center justify-center">
-        <input
-          type="text"
-          value={searchPokemon}
-          autoComplete="off"
-          id="pokemonName"
-          placeholder="Charizard, Pikachu, etc."
-          onChange={(e) => setSearchPokemon(e.target.value)}
-          className="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-        />
-      </div>
+      {suggestion.loading ? (
+        <div></div>
+      ) : (
+        <div className="py-10 flex items-center justify-center">
+          <SearchComponent pokemons={suggestion.data} />
+        </div>
+      )}
 
       {loading ? (
         <div className="flex justify-center items-center">Loading</div>
