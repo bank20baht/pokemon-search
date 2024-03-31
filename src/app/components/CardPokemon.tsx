@@ -4,6 +4,7 @@ import "./CardPokemon.css";
 import BackCard from "./BackCard";
 import { Attacks } from "./BackCard";
 import { useRouter } from "next/navigation";
+import useStore from "../store/store";
 type Props = {
   PokemonInfo: PokemonCard;
 };
@@ -18,12 +19,14 @@ export type PokemonCard = {
 
 const CardPokemon = ({ PokemonInfo }: Props) => {
   const router = useRouter();
+  const { setSearchValue } = useStore();
 
   return (
     <div
       className="card-container"
       onClick={() => {
         router.push("/" + PokemonInfo.name);
+        setSearchValue("");
       }}
     >
       <div className="card">

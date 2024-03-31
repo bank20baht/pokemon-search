@@ -19,7 +19,7 @@ export type Attacks = {
 const BackCard = ({ Attack }: Props) => {
   return (
     <div className="justify-center">
-      <div>Fast</div>
+      <div className="font-medium text-xl text-center">Fast</div>
       {Attack.fast.map((value: Attack, index: number) => (
         <div key={index} className="flex flex-row gap-2 justify-between">
           <div>{value.name}</div>
@@ -27,7 +27,7 @@ const BackCard = ({ Attack }: Props) => {
           <PokemonTypeCard type={value.type as POKEMON_TYPE} />
         </div>
       ))}
-      <div>Special</div>
+      <div className="font-medium text-xl text-center">Special</div>
       {Attack.special.map((value: Attack, index: number) => (
         <div
           key={index}
