@@ -21,7 +21,7 @@ const DetailPage = ({ params }: Props) => {
   const { loading, error, data } = useQuery(
     searchValue ? queryBySearchBar(searchValue) : queryDetailPokemon(params.id),
     {
-      fetchPolicy: "network-only",
+      fetchPolicy: "cache-first",
     }
   );
 

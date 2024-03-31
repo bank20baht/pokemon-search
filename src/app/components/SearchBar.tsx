@@ -12,7 +12,7 @@ type Props = {};
 
 const SearchBar = (props: Props) => {
   const { loading, error, data } = useQuery(queryBySuggestion, {
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-first",
   });
   const router = useRouter();
 
