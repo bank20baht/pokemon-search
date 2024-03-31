@@ -82,7 +82,11 @@ const PokemonDetail = ({ pokemon }: PokemonDisplayProps) => {
           <div className="font-bold py-2">Types</div>
           <div className="flex flex-row gap-2">
             {pokemon.types.map((type: POKEMON_TYPE, index: number) => (
-              <PokemonTypeCard type={type} key={index} />
+              <PokemonTypeCard
+                type={type}
+                key={index}
+                testid={`p_type_${index}`}
+              />
             ))}
           </div>
 

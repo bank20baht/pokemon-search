@@ -23,6 +23,7 @@ export type POKEMON_TYPE =
 
 type Props = {
   type: POKEMON_TYPE;
+  testid?: string;
 };
 
 const typeToClass = {
@@ -47,10 +48,13 @@ const typeToClass = {
   Stellar: "bg-red-700",
 };
 
-const PokemonTypeCard = ({ type }: Props) => {
+const PokemonTypeCard = ({ type, testid }: Props) => {
   const className = typeToClass[type];
   return (
-    <div className={`${className} px-2 py-1 rounded-md text-xs text-white`}>
+    <div
+      data-testid={testid}
+      className={`${className} px-2 py-1 rounded-md text-xs text-white`}
+    >
       {type}
     </div>
   );
