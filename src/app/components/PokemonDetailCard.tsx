@@ -10,7 +10,7 @@ type PokemonDisplayProps = {
 const PokemonDetailCard = ({ pokemon }: PokemonDisplayProps) => {
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col md:flex-row md:justify-center md:items-start gap-5">
+      <div className="flex flex-col md:flex-row md:justify-center md:items-start gap-5 m-5">
         <div className="flex flex-col items-center w-full xl:w-1/2">
           <h1 className="text-4xl font-bold">{pokemon.name}</h1>
           <Image

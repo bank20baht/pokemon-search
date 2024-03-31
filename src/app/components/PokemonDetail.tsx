@@ -68,7 +68,7 @@ const PokemonDetail = ({ pokemon }: PokemonDisplayProps) => {
       <PokemonDetailCard pokemon={pokemon} />
       {pokemon.evolutions ? (
         <div>
-          <div className="font-medium text-2xl py-2">Evolutions</div>
+          <div className="font-medium text-2xl py-2 ml-12">Evolutions</div>
           <PokemonList pokemonInfo={pokemon.evolutions} />
         </div>
       ) : (
