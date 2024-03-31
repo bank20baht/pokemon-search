@@ -4,13 +4,22 @@ i use for learn how to use graphql work with next.js 14 to display pokemon infor
 link: https://pokemon-search-bank.vercel.app/
 graphql: https://graphql-pokemon2.vercel.app/
 
+## How to install
+```
+yarn
+```
+```
+yarn dev
+```
+
 ## knowledge
 - caching image with next/image
 - next routing
 - state management with zustand
 - deploy with vercal
 - tailwindcss
-
+- unit test in frontend with jest
+  
 ## Feature
 - Search Pokemon with suggestion (get list from backend)
 - flip card with css
