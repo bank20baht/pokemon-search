@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useQuery } from "@apollo/client";
 import CardPokemon, { PokemonCard } from "./components/CardPokemon";
 import useStore from "./store/store";
@@ -23,6 +23,10 @@ export default function Home() {
   const pokemons = data?.query?.pokemons;
   const pokemon = data?.query?.pokemon;
 
+  const incrementLimit = useCallback(() => {
+    setLimit((prevLimit) => prevLimit + 10);
+  }, []);
+
   if (error) {
     return (
       <div className="py-10 bg-red-500 text-white text-center">
@@ -41,7 +45,7 @@ export default function Home() {
           <div className="flex justify-center">
             <div
               className="text-white bg-blue-400 rounded-lg py-3 px-2"
-              onClick={() => setLimit(limit + 10)}
+              onClick={incrementLimit}
             >
               More Pokemon
             </div>

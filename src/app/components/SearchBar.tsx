@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import SearchComponent from "./SearchSuggestions";
 import { useQuery } from "@apollo/client";
 import { queryBySuggestion } from "../graphql/queries";
@@ -15,6 +15,8 @@ const SearchBar = (props: Props) => {
     fetchPolicy: "cache-first",
   });
   const router = useRouter();
+
+  const memoizedData = useMemo(() => data, [data]);
 
   if (error) {
     return (
@@ -44,7 +46,7 @@ const SearchBar = (props: Props) => {
               width={40}
             />
           </div>
-          <SearchComponent pokemons={data} />
+          <SearchComponent pokemons={memoizedData} />
           <div>{""}</div>
         </div>
       )}

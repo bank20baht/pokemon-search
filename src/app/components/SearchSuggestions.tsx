@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import useStore from "../store/store";
 
 interface Pokemon {
@@ -40,15 +40,18 @@ const SearchComponent: React.FC<Props> = ({ pokemons }) => {
     setSuggestions(filteredSuggestions);
   };
 
-  const toggleModal = () => {
-    setOpenModal(!openModal);
-  };
+  const toggleModal = useCallback(() => {
+    setOpenModal((prevOpenModal) => !prevOpenModal);
+  }, []);
 
-  const handleSuggestionClick = (suggestion: string) => {
-    setSearchValue(suggestion);
-    toggleModal();
-    setSuggestions([]);
-  };
+  const handleSuggestionClick = useCallback(
+    (suggestion: string) => {
+      setSearchValue(suggestion);
+      toggleModal();
+      setSuggestions([]);
+    },
+    [setSearchValue, toggleModal]
+  );
 
   return (
     <div style={{ position: "relative" }}>
