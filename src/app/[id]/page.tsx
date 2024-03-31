@@ -25,6 +25,14 @@ const DetailPage = ({ params }: Props) => {
     }
   );
 
+  if (error) {
+    return (
+      <div className="py-10 bg-red-500 text-white text-center">
+        Error: {error.message}
+      </div>
+    );
+  }
+
   return (
     <div>
       {loading ? (

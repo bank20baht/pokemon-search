@@ -23,6 +23,14 @@ export default function Home() {
   const pokemons = data?.query?.pokemons;
   const pokemon = data?.query?.pokemon;
 
+  if (error) {
+    return (
+      <div className="py-10 bg-red-500 text-white text-center">
+        Error: {error.message}
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col">
       {loading ? (

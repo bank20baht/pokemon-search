@@ -10,7 +10,7 @@ import {
 
 function makeClient() {
   const httpLink = new HttpLink({
-    uri: "https://graphql-pokemon2.vercel.app/",
+    uri: process.env.API_URL,
   });
 
   return new NextSSRApolloClient({
