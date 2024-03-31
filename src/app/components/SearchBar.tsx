@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import { queryBySuggestion } from "../graphql/queries";
 import PokemonIcon from "../assets/icon/icon.svg";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 type Props = {};
 
@@ -27,7 +28,13 @@ const SearchBar = (props: Props) => {
               router.push("/");
             }}
           >
-            <img className="w-10 h-10" src={PokemonIcon.src} alt="icon" />
+            <Image
+              className="w-10 h-10"
+              src={PokemonIcon.src}
+              alt="icon"
+              height={40}
+              width={40}
+            />
           </div>
           <SearchComponent pokemons={data} />
           <div>{""}</div>

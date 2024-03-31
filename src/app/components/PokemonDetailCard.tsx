@@ -1,6 +1,7 @@
 import React from "react";
 import { Pokemon } from "./PokemonDetail";
 import PokemonTypeCard, { POKEMON_TYPE } from "./PokemonTypeCard";
+import Image from "next/image";
 
 type PokemonDisplayProps = {
   pokemon: Pokemon;
@@ -12,10 +13,13 @@ const PokemonDetailCard = ({ pokemon }: PokemonDisplayProps) => {
       <div className="flex flex-col md:flex-row md:justify-center md:items-start gap-5">
         <div className="flex flex-col items-center w-full xl:w-1/2">
           <h1 className="text-4xl font-bold">{pokemon.name}</h1>
-          <img
+          <Image
             className="w-64 h-64 mt-8"
+            loader={() => pokemon.image}
             src={pokemon.image}
             alt={pokemon.name}
+            height={256}
+            width={256}
           />
           <p className="font-bold mt-8">
             Classification:{" "}
