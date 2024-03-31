@@ -50,7 +50,9 @@ const typeToClass = {
 const PokemonTypeCard = ({ type }: Props) => {
   const className = typeToClass[type];
   return (
-    <div className={`${className} px-2 py-1 rounded-md text-white`}>{type}</div>
+    <div className={`${className} px-2 py-1 rounded-md text-xs text-white`}>
+      {type}
+    </div>
   );
 };
 

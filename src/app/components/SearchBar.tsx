@@ -20,14 +20,14 @@ const SearchBar = (props: Props) => {
       {loading ? (
         <div className="py-10 bg-red-500">{""}</div>
       ) : (
-        <div className="py-10 flex items-center justify-between bg-red-500">
+        <div className="flex items-center justify-between bg-red-500">
           <div
-            className="cursor-pointer h-16 w-16 pl-3"
+            className="cursor-pointer h-16 w-16 pl-3 flex  items-center"
             onClick={() => {
               router.push("/");
             }}
           >
-            <img src={PokemonIcon.src} alt="icon" />
+            <img className="w-10 h-10" src={PokemonIcon.src} alt="icon" />
           </div>
           <SearchComponent pokemons={data} />
           <div>{""}</div>
