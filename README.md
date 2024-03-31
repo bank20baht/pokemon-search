@@ -19,6 +19,8 @@ yarn dev
 - deploy with vercal
 - tailwindcss
 - unit test in frontend with jest
+- caching with apollo
+- ssr
   
 ## Feature
 - Search Pokemon with suggestion (get list from backend)
