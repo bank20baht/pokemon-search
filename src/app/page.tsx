@@ -16,7 +16,7 @@ export default function Home() {
   const { loading, error, data } = useQuery(
     searchValue ? queryBySearchBar(searchValue) : listPokemon(limit),
     {
-      fetchPolicy: "network-only",
+      fetchPolicy: "cache-first",
     }
   );
 
