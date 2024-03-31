@@ -1,8 +1,6 @@
 import React from "react";
 import PokemonList from "./PokemonList";
-import { POKEMON_TYPE } from "./PokemonTypeCard";
-
-// src/Pokemon.ts
+import PokemonTypeCard, { POKEMON_TYPE } from "./PokemonTypeCard";
 
 export interface Pokemon {
   name: string;
@@ -16,8 +14,8 @@ export interface Pokemon {
     maximum: string;
   };
   classification: string;
-  types: string[];
-  resistant: string[];
+  types: POKEMON_TYPE[];
+  resistant: POKEMON_TYPE[];
   attacks: {
     fast: {
       name: string;
@@ -30,7 +28,7 @@ export interface Pokemon {
       damage: number;
     }[];
   };
-  weaknesses: string[];
+  weaknesses: POKEMON_TYPE[];
   fleeRate: number;
   maxCP: number;
   evolutions: {
@@ -70,9 +68,33 @@ const PokemonDetail = ({ pokemon }: PokemonDisplayProps) => {
         <h1>{pokemon.name}</h1>
         <img src={pokemon.image} alt={pokemon.name} />
         <p>Classification: {pokemon.classification}</p>
-        <p>Types: {pokemon.types.join(", ")}</p>
-        <p>Resistant: {pokemon.resistant.join(", ")}</p>
-        <p>Weaknesses: {pokemon.weaknesses.join(", ")}</p>
+        <div>
+          <div className="font-medium text-xl py-2">Types</div>
+          <div className="flex flex-row gap-2">
+            {pokemon.types.map((type: POKEMON_TYPE, index: number) => (
+              <PokemonTypeCard type={type} key={index} />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div className="font-medium text-xl py-2">Resistant</div>
+          <div className="flex flex-row gap-2">
+            {pokemon.resistant.map((type: POKEMON_TYPE, index: number) => (
+              <PokemonTypeCard type={type} key={index} />
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div className="font-medium text-xl py-2">Weaknesses</div>
+          <div className="flex flex-row gap-2">
+            {pokemon.weaknesses.map((type: POKEMON_TYPE, index: number) => (
+              <PokemonTypeCard type={type} key={index} />
+            ))}
+          </div>
+        </div>
+
         <p>Flee Rate: {pokemon.fleeRate}</p>
         <p>Max CP: {pokemon.maxCP}</p>
         <p>Max HP: {pokemon.maxHP}</p>
@@ -95,7 +117,7 @@ const PokemonDetail = ({ pokemon }: PokemonDisplayProps) => {
         </ul>
         {pokemon.evolutions ? (
           <div>
-            <h2>Evolutions</h2>
+            <div className="font-medium text-xl py-2">Evolutions</div>
             <PokemonList pokemonInfo={pokemon.evolutions} />
           </div>
         ) : (

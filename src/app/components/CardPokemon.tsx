@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import PokemonTypeCard, { POKEMON_TYPE } from "./PokemonTypeCard";
 import "./CardPokemon.css";
