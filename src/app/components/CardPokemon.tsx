@@ -5,6 +5,8 @@ import BackCard from "./BackCard";
 import { Attacks } from "./BackCard";
 import { useRouter } from "next/navigation";
 import useStore from "../store/store";
+import Image from "next/image";
+
 type Props = {
   PokemonInfo: PokemonCard;
 };
@@ -32,10 +34,12 @@ const CardPokemon = ({ PokemonInfo }: Props) => {
       <div className="card">
         <div className="front-card">
           <div className="">
-            <img
+            <Image
+              loader={() => PokemonInfo.image}
               src={PokemonInfo.image}
               alt={PokemonInfo.name}
-              className="w-32 h-32"
+              width={128}
+              height={128}
             />
           </div>
           <div className="font-bold text-xl py-5">{PokemonInfo.name}</div>
