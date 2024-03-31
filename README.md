@@ -17,11 +17,11 @@ graphql: https://graphql-pokemon2.vercel.app/
 - Search with pokemon name and work with graphql
 
 ## Image
-main page
+- main page
 ![image](https://github.com/bank20baht/pokemon-search/assets/89448778/e3802521-4a21-49d2-a7bd-5c67f273fb5a)
 
-can flip card (hover)
+- can flip card (hover)
 ![image](https://github.com/bank20baht/pokemon-search/assets/89448778/67c3acc7-85d0-43c8-89b5-140df5c4888d)
 
-click to see more detail
+- click to see more detail
 ![image](https://github.com/bank20baht/pokemon-search/assets/89448778/b44e9623-d6ab-4f30-b6a8-b4a3dfb87d60)
